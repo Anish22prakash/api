@@ -88,8 +88,9 @@
        height: auto
 
    }
-   h6{
+   h4{
        color: white;
+       font-size: 16px;
    }
    #boxstyle>div>h1{
       margin-left: 3%;
@@ -143,7 +144,13 @@
         <div>
             <h1>Saturday</h1>
             <img class="imglogo" src="https://cdn-icons-png.flaticon.com/128/4064/4064269.png">
-            <h1 id="bx6"></h1>
+            <h1 id="bx7"></h1>
+        </div>
+
+        <div>
+            <h1>Saturday</h1>
+            <img class="imglogo" src="https://cdn-icons-png.flaticon.com/128/869/869869.png">
+            <h1 id="bx8"></h1>
         </div>
     </div>
    
@@ -174,8 +181,17 @@
       try{
           var res= await fetch(url)
           var user= await res.json()
-          console.log(user)
-          display(user)
+          var lon=user.coord.lon
+          var lat=user.coord.lat
+   console.log(lon,lat)
+
+   let lonurl=`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,current,alerts&appid=080df2ea2a482191cc1b47043318ab4b`
+          
+   var res1= await fetch(lonurl)
+   var user1= await res1.json()
+
+   console.log(user1.daily)
+          display(user1.daily)
       }
       catch(er){
           console.log(er)
@@ -192,37 +208,153 @@
     document.getElementById("bx5").innerHTML=null
     document.getElementById("bx6").innerHTML=null
 
-      var cityname=document.createElement("h1")
-      cityname.innerText= `Welcome to ${data.name}`   
+    for(var i=0;i<data.length;i++){
+       
+        if(i==0){
 
-      var tempre=document.createElement("h6")
-      tempre.innerText= `Temp ${data.main.temp}°F` 
-      
-      var maxtem=document.createElement("h6")
-      maxtem.innerText= ` Max ${data.main.temp_max}°F`
+      let maxtem=document.createElement("h4")
+      maxtem.innerText= ` Max ${data[i].temp.max}°F`
 
-      var mintem=document.createElement("h6")
-      mintem.innerText= `Min ${data.main.temp_min}°F`  
+      let mintem=document.createElement("h4")
+      mintem.innerText= `Min ${data[i].temp.min}°F` 
 
-      var wind=document.createElement("h6")
-      wind.innerText= `wind ${data.wind.speed}m/sec`  
-
-      var rise=document.createElement("h6")
-      rise.innerText= `Sunrise ${data.sys.sunrise}`
-
-      var set=document.createElement("h6")
-      set.innerText= `Sunset ${data.sys.sunset}`
+      document.getElementById("bx1").append(maxtem,mintem)
 
       var map=document.getElementById("gmap_canvas")
-   map.src= `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+     map.src= `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
 
-   //document.getElementById("degree").append(cityname,tempre,maxtem,mintem,wind,rise,set)
-   document.getElementById("bx1").append(tempre)
-   document.getElementById("bx2").append(maxtem)
-   document.getElementById("bx3").append(mintem)
-   document.getElementById("bx4").append(wind)
-   document.getElementById("bx5").append(rise)
-   document.getElementById("bx6").append(set)
+        }
+
+
+        if(i==1){
+
+let maxtem=document.createElement("h4")
+maxtem.innerText= ` Max ${data[i].temp.max}°F`
+
+let mintem=document.createElement("h4")
+mintem.innerText= `Min ${data[i].temp.min}°F` 
+
+document.getElementById("bx2").append(maxtem,mintem)
+
+var map=document.getElementById("gmap_canvas")
+map.src= `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+  }
+
+  if(i==2){
+
+let maxtem=document.createElement("h4")
+maxtem.innerText= ` Max ${data[i].temp.max}°F`
+
+let mintem=document.createElement("h4")
+mintem.innerText= `Min ${data[i].temp.min}°F` 
+
+document.getElementById("bx3").append(maxtem,mintem)
+
+var map=document.getElementById("gmap_canvas")
+map.src= `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+  }
+
+  if(i==3){
+
+let maxtem=document.createElement("h4")
+maxtem.innerText= ` Max ${data[i].temp.max}°F`
+
+let mintem=document.createElement("h4")
+mintem.innerText= `Min ${data[i].temp.min}°F` 
+
+document.getElementById("bx4").append(maxtem,mintem)
+
+var map=document.getElementById("gmap_canvas")
+map.src= `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+  }
+  if(i==4){
+
+let maxtem=document.createElement("h4")
+maxtem.innerText= ` Max ${data[i].temp.max}°F`
+
+let mintem=document.createElement("h4")
+mintem.innerText= `Min ${data[i].temp.min}°F` 
+
+document.getElementById("bx5").append(maxtem,mintem)
+
+var map=document.getElementById("gmap_canvas")
+map.src= `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+  }
+
+  if(i==5){
+
+let maxtem=document.createElement("h4")
+maxtem.innerText= ` Max ${data[i].temp.max}°F`
+
+let mintem=document.createElement("h4")
+mintem.innerText= `Min ${data[i].temp.min}°F` 
+
+document.getElementById("bx6").append(maxtem,mintem)
+
+var map=document.getElementById("gmap_canvas")
+map.src= `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+  }
+
+  if(i==6){
+
+let maxtem=document.createElement("h4")
+maxtem.innerText= ` Max ${data[i].temp.max}°F`
+
+let mintem=document.createElement("h4")
+mintem.innerText= `Min ${data[i].temp.min}°F` 
+
+document.getElementById("bx7").append(maxtem,mintem)
+
+var map=document.getElementById("gmap_canvas")
+map.src= `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+  }
+  if(i==7){
+
+let maxtem=document.createElement("h4")
+maxtem.innerText= ` Max ${data[i].temp.max}°F`
+
+let mintem=document.createElement("h4")
+mintem.innerText= `Min ${data[i].temp.min}°F` 
+
+document.getElementById("bx8").append(maxtem,mintem)
+
+var map=document.getElementById("gmap_canvas")
+map.src= `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+  }
+
+  
+    }
+
+//       var cityname=document.createElement("h1")
+//       cityname.innerText= `Welcome to ${data.name}`   
+
+       
+
+//       var wind=document.createElement("h6")
+//       wind.innerText= `wind ${data.wind.speed}m/sec`  
+
+//       var rise=document.createElement("h6")
+//       rise.innerText= `Sunrise ${data.sys.sunrise}`
+
+//       var set=document.createElement("h6")
+//       set.innerText= `Sunset ${data.sys.sunset}`
+
+//     
+
+//    //document.getElementById("degree").append(cityname,tempre,maxtem,mintem,wind,rise,set)
+   
+//    document.getElementById("bx2").append(maxtem)
+//    document.getElementById("bx3").append(mintem)
+//    document.getElementById("bx4").append(wind)
+//    document.getElementById("bx5").append(rise)
+//    document.getElementById("bx6").append(set)
     
    
   }
